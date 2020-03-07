@@ -6,7 +6,7 @@ window.onload = () => {
     let ctx = document.getElementById("canvas").getContext("2d");
     // For ending the game
     let runningGame = true;
-    // Create car object
+    // Create car objectfksdjf
     let player = {
         x: 220,
         y: 400,
