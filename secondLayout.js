@@ -58,6 +58,14 @@ window.onload = () => {
                 this.right() < obstacle.left() ||
                 this.left() > obstacle.right()
             );
+        },
+        win: function (winObj) {
+            return (
+                this.bottom() < winObj.top() ||
+                this.top() > winObj.bottom() ||
+                this.right() < winObj.left() ||
+                this.left() > winObj.right()
+            );
         }
     };
     // Create obstacles
@@ -89,9 +97,38 @@ window.onload = () => {
             return this.x + this.width;
         }
     }
+    class winObject {
+        constructor(posX) {
+            this.x = posX;
+            this.y = 0;
+            this.width = 100;
+            this.height = 50;
+            this.color = 'blue';
+            this.speedY = 2;
+        }
+        update() {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            this.y += 2;
+        }
+        top() {
+            return this.y + 2;
+        }
+        left() {
+            return this.x - 2;
+        }
+        bottom() {
+            return this.y + this.height - 4;
+        }
+        right() {
+            return this.x + this.width - 2;
+        }
+    }
+
 
     let counter = 0;
     let obstaclesArr = [];
+    let winObj = null
 
     let draw = () => {
         if (!runningGame) {
@@ -121,6 +158,20 @@ window.onload = () => {
 
             }
         }
+        if (counter === 800) {
+            let randomPoxWin = Math.floor(Math.random() * (400 - 50) + 50);
+            if (randomPoxWin <= 450) {
+                winObj = new winObject(randomPoxWin)
+            }
+        }
+        if (winObj !== null) {
+            winObj.update()
+            if (player.crash(winObj)) {
+                alert('you won')
+
+            }
+        }
+
 
         window.requestAnimationFrame(draw);
     };
