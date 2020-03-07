@@ -112,16 +112,16 @@ window.onload = () => {
             this.y += 2;
         }
         top() {
-            return this.y + 2;
+            return this.y - 8;
         }
         left() {
-            return this.x - 2;
+            return this.x - 8;
         }
         bottom() {
-            return this.y + this.height - 4;
+            return this.y + this.height - 8;
         }
         right() {
-            return this.x + this.width - 2;
+            return this.x + this.width - 8;
         }
     }
 
@@ -158,7 +158,7 @@ window.onload = () => {
 
             }
         }
-        if (counter === 800) {
+        if (counter === 400) {
             let randomPoxWin = Math.floor(Math.random() * (400 - 50) + 50);
             if (randomPoxWin <= 450) {
                 winObj = new winObject(randomPoxWin)
